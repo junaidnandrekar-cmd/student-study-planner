@@ -50,10 +50,12 @@ function renderTasks() {
     });
 
     if (sortByPriority) {
-        visibleTasks.sort((a, b) =>
-            priorityOrder[a.priority] - priorityOrder[b.priority]
-        );
-    }
+    visibleTasks.sort((a, b) =>
+        priorityOrder[a.priority] - priorityOrder[b.priority]
+    );
+} else {
+    visibleTasks.sort((a, b) => a.date.localeCompare(b.date));
+}
 
     if (visibleTasks.length === 0) {
         const empty = document.createElement("div");
@@ -94,7 +96,17 @@ function renderTasks() {
         subject.textContent = "📚 " + (task.subject || "General");
 
         const deadline = document.createElement("span");
-        deadline.textContent = "📅 " + task.date;
+        const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const taskDeadline = new Date(task.date + "T00:00:00");
+deadline.textContent = "📅 " + task.date;
+
+if (!task.completed && taskDeadline < today) {
+    deadline.textContent += " ⚠️ OVERDUE";
+    deadline.style.color = "#d83e52";
+    deadline.style.fontWeight = "700";
+}
 
         const priority = document.createElement("span");
         priority.className = "priority " + task.priority;
