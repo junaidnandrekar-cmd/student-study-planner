@@ -5,12 +5,12 @@ const taskList = document.getElementById("taskList");
 let tasks = JSON.parse(localStorage.getItem("studyPlannerTasks")) || [];
 let currentFilter = "all";
 let sortByPriority = false;
+let editingTaskId = null;
 
-const priorityOrder = {
-    High: 1,
-    Medium: 2,
-    Low: 3
-};
+const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+
+const today = new Date();
+today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
 
 document.getElementById("todayDate").textContent =
     new Date().toLocaleDateString("en-IN", {
@@ -20,7 +20,7 @@ document.getElementById("todayDate").textContent =
     });
 
 document.getElementById("taskDate").value =
-    new Date().toLocaleDateString("en-CA");
+    today.toISOString().slice(0, 10);
 
 function saveTasks() {
     localStorage.setItem("studyPlannerTasks", JSON.stringify(tasks));
@@ -73,6 +73,7 @@ function renderTasks() {
         checkbox.className = "task-check";
         checkbox.checked = task.completed;
         checkbox.setAttribute("aria-label", "Mark task complete");
+
         checkbox.addEventListener("change", () => {
             task.completed = checkbox.checked;
             saveTasks();
@@ -102,21 +103,75 @@ function renderTasks() {
         meta.append(subject, deadline, priority);
         content.append(title, meta);
 
+        const actions = document.createElement("div");
+        actions.style.display = "flex";
+        actions.style.gap = "6px";
+
+        const editButton = document.createElement("button");
+        editButton.className = "secondary-btn";
+        editButton.type = "button";
+        editButton.textContent = "✏️";
+        editButton.title = "Edit task";
+
+        editButton.addEventListener("click", () => {
+            document.getElementById("taskTitle").value = task.title;
+            document.getElementById("taskSubject").value = task.subject || "";
+            document.getElementById("taskDate").value = task.date;
+            document.getElementById("taskPriority").value = task.priority;
+
+            editingTaskId = task.id;
+
+            const submitButton = taskForm.querySelector(
+                'button[type="submit"]'
+            );
+            submitButton.textContent = "Save Changes";
+
+            document.getElementById("taskTitle").focus();
+            document.getElementById("taskTitle").scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        });
+
         const deleteButton = document.createElement("button");
         deleteButton.className = "delete-btn";
+        deleteButton.type = "button";
         deleteButton.textContent = "✕";
-        deleteButton.setAttribute("aria-label", "Delete task");
+        deleteButton.title = "Delete task";
+
         deleteButton.addEventListener("click", () => {
             tasks = tasks.filter(item => item.id !== task.id);
+
+            if (editingTaskId === task.id) {
+                resetForm();
+            }
+
             saveTasks();
             renderTasks();
         });
 
-        card.append(checkbox, content, deleteButton);
+        actions.append(editButton, deleteButton);
+        card.append(checkbox, content, actions);
         taskList.appendChild(card);
     });
 
     updateStats();
+}
+
+function resetForm() {
+    taskForm.reset();
+    editingTaskId = null;
+
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+    document.getElementById("taskDate").value =
+        now.toISOString().slice(0, 10);
+
+    document.getElementById("taskPriority").value = "Medium";
+
+    taskForm.querySelector('button[type="submit"]').textContent =
+        "+ Add Task";
 }
 
 taskForm.addEventListener("submit", event => {
@@ -132,22 +187,37 @@ taskForm.addEventListener("submit", event => {
         return;
     }
 
-    tasks.push({
-        id: Date.now() + Math.random(),
-        title,
-        subject,
-        date,
-        priority,
-        completed: false
-    });
+    const selectedDate = new Date(date + "T00:00:00");
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < currentDate) {
+        alert("Deadline cannot be in the past. Please select today or a future date.");
+        return;
+    }
+
+    if (editingTaskId !== null) {
+        const task = tasks.find(item => item.id === editingTaskId);
+
+        if (task) {
+            task.title = title;
+            task.subject = subject;
+            task.date = date;
+            task.priority = priority;
+        }
+    } else {
+        tasks.push({
+            id: Date.now() + Math.random(),
+            title,
+            subject,
+            date,
+            priority,
+            completed: false
+        });
+    }
 
     saveTasks();
-    taskForm.reset();
-
-    document.getElementById("taskDate").value =
-        new Date().toLocaleDateString("en-CA");
-
-    document.getElementById("taskPriority").value = "Medium";
+    resetForm();
 
     currentFilter = "all";
     document.querySelectorAll(".filter-btn").forEach(button => {
@@ -171,6 +241,7 @@ document.querySelectorAll(".filter-btn").forEach(button => {
 
 document.getElementById("sortBtn").addEventListener("click", () => {
     sortByPriority = !sortByPriority;
+
     document.getElementById("sortBtn").textContent = sortByPriority
         ? "Priority: High to Low ✓"
         : "Sort by Priority ↕";
