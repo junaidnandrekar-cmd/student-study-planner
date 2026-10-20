@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner | Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">Study<span>Planner.</span></div>
+        <div class="nav-text">Your daily success starts here ✨</div>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <div>
+                <p class="eyebrow">YOUR PERSONAL DASHBOARD</p>
+                <h1>Plan your day, achieve your goals.</h1>
+                <p class="subtitle">Organize your studies one task at a time.</p>
+            </div>
+            <div class="date-box">
+                <span>📅 TODAY</span>
+                <strong id="todayDate">Loading...</strong>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <span>Total Tasks</span>
+                <h2 id="totalTasks">0</h2>
+                <p>Tasks in your planner</p>
+            </div>
+            <div class="stat-card">
+                <span>Completed</span>
+                <h2 id="completedTasks">0</h2>
+                <p>Tasks finished</p>
+            </div>
+            <div class="stat-card">
+                <span>Pending</span>
+                <h2 id="pendingTasks">0</h2>
+                <p>Tasks to complete</p>
+            </div>
+        </section>
+
+        <section class="planner-layout">
+
+            <div class="panel form-panel">
+                <h2>➕ Add a New Task</h2>
+                <p class="panel-subtitle">Make a plan and get things done.</p>
+
+                <form id="taskForm">
+                    <label for="taskTitle">Task Name</label>
+                    <input type="text" id="taskTitle"
+                           placeholder="e.g. Complete Python practice"
+                           required maxlength="100">
+
+                    <label for="taskSubject">Subject / Category</label>
+                    <input type="text" id="taskSubject"
+                           placeholder="e.g. Python, DBMS, Cloud">
+
+                    <div class="form-row">
+                        <div>
+                            <label for="taskDate">Deadline</label>
+                            <input type="date" id="taskDate" required>
+                        </div>
+                        <div>
+                            <label for="taskPriority">Priority</label>
+                            <select id="taskPriority">
+                                <option value="High">High</option>
+                                <option value="Medium" selected>Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="primary-btn">
+                        + Add Task
+                    </button>
+                </form>
+            </div>
+
+            <div class="panel tasks-panel">
+                <div class="tasks-heading">
+                    <div>
+                        <h2>📚 My Study Tasks</h2>
+                        <p class="panel-subtitle">Stay focused and consistent.</p>
+                    </div>
+                    <button id="sortBtn" class="secondary-btn" type="button">
+                        Sort by Priority ↕
+                    </button>
+                </div>
+
+                <div class="progress-section">
+                    <div class="progress-label">
+                        <span>Overall Progress</span>
+                        <strong id="progressText">0%</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+
+                <div id="taskList" class="task-list"></div>
+            </div>
+
+        </section>
+
+        <footer>
+            <p>Made with ❤️ for students | Student Study Planner</p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
