@@ -434,3 +434,86 @@ footer {
     outline: none;
     box-shadow: 0 0 0 3px #6558e815;
 }
+
+/* Change 5: Responsive UI improvements */
+
+@media (max-width: 600px) {
+    .container {
+        width: 94%;
+        margin: 18px auto;
+    }
+
+    .navbar {
+        height: auto;
+        min-height: 65px;
+        padding: 15px 5%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .welcome {
+        padding: 22px 18px;
+        border-radius: 14px;
+    }
+
+    .welcome h1 {
+        font-size: 24px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-card h2 {
+        font-size: 25px;
+    }
+
+    .planner-layout {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .panel {
+        padding: 18px;
+        min-width: 0;
+    }
+
+    .tasks-heading {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .secondary-btn {
+        min-height: 40px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .task-card {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .task-meta {
+        gap: 6px;
+    }
+
+    .filters {
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        flex: 1;
+        min-height: 38px;
+    }
+}
