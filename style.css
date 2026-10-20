@@ -414,3 +414,23 @@ footer {
         flex-direction: column;
     }
 }
+
+.search-box {
+    margin: 18px 0;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fafaff;
+    font-size: 13px;
+}
+
+.search-box input:focus {
+    background: white;
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px #6558e815;
+}

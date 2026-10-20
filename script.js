@@ -43,11 +43,23 @@ function updateStats() {
 function renderTasks() {
     taskList.replaceChildren();
 
-    let visibleTasks = tasks.filter(task => {
-        if (currentFilter === "pending") return !task.completed;
-        if (currentFilter === "completed") return task.completed;
-        return true;
-    });
+    
+const searchText = document.getElementById("taskSearch")
+    .value.trim().toLowerCase();
+
+let visibleTasks = tasks.filter(task => {
+    const matchesFilter =
+        currentFilter === "all" ||
+        (currentFilter === "pending" && !task.completed) ||
+        (currentFilter === "completed" && task.completed);
+
+    const matchesSearch =
+        task.title.toLowerCase().includes(searchText) ||
+        (task.subject || "").toLowerCase().includes(searchText);
+
+    return matchesFilter && matchesSearch;
+});
+
 
     if (sortByPriority) {
     visibleTasks.sort((a, b) =>
@@ -262,3 +274,6 @@ document.getElementById("sortBtn").addEventListener("click", () => {
 });
 
 renderTasks();
+document.getElementById("taskSearch").addEventListener("input", () => {
+    renderTasks();
+});
