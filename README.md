@@ -101,20 +101,34 @@ The following checks were performed:
 
 ## Screenshots
 
-## Screenshots
+### GitHub Repository Evidence
 
-### Student Study Planner Homepage
+**1. GitHub Push Evidence**
 
-![Study Planner Homepage](<img width="1917" height="1070" alt="Screenshot 2026-10-20 101408" src="https://github.com/user-attachments/assets/392d20af-66a9-4620-8bdc-474cba4d9d25" />
-)
+![GitHub Push Evidence](./screenshots/22-git-push-evidence.png.png)
 
-### Jenkins Build Success
+**2. GitHub Commit History**
 
-![Jenkins Build Success](22-git-push-evidence.png)
+![GitHub Commit History](./screenshots/GitHub-Commit-History.png.png)
 
-### GitHub Repository Files
+**3. GitHub Website Files**
 
-![GitHub Repository Files](GitHub-Commit-History.png).
+![GitHub Website Files](./screenshots/GitHub-Website-Files.png.png)
+
+### Project and Jenkins Evidence
+
+**4. Project Screenshot**
+
+![Project Screenshot](./screenshots/Screenshot%202026-10-20%20101353.png)
+
+**5. Jenkins and Project Evidence**
+
+![Jenkins Evidence](./screenshots/Screenshot%202026-10-20%20101408.png)
+
+**6. Additional Project Evidence**
+
+![Project Evidence](./screenshots/Screenshot%202026-10-20%20101444.png)
+
 
 ## Conclusion
 
