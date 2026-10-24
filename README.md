@@ -105,15 +105,16 @@ The following checks were performed:
 
 ### Student Study Planner Homepage
 
-![Study Planner Homepage](screenshots/homepage.png)
+![Study Planner Homepage](<img width="1917" height="1070" alt="Screenshot 2026-10-20 101408" src="https://github.com/user-attachments/assets/392d20af-66a9-4620-8bdc-474cba4d9d25" />
+)
 
 ### Jenkins Build Success
 
-![Jenkins Build Success](screenshots/jenkins-success.png)
+![Jenkins Build Success](22-git-push-evidence.png)
 
 ### GitHub Repository Files
 
-![GitHub Repository Files](screenshots/github-files.png).
+![GitHub Repository Files](GitHub-Commit-History.png).
 
 ## Conclusion
 
