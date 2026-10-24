@@ -123,7 +123,7 @@ The following checks were performed:
 
 **5. Jenkins and Project Evidence**
 
-![Jenkins Evidence](./screenshots/Screenshot%202026-10-20%20101408.png)
+![Jenkins Evidence](./screenshots/Screenshot%202026-10-20%20153908.png)
 
 **6. Additional Project Evidence**
 
