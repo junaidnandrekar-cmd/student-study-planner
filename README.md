@@ -101,7 +101,19 @@ The following checks were performed:
 
 ## Screenshots
 
-Project screenshots and practical evidence are stored in the `screenshots/` folder.
+## Screenshots
+
+### Student Study Planner Homepage
+
+![Study Planner Homepage](screenshots/homepage.png)
+
+### Jenkins Build Success
+
+![Jenkins Build Success](screenshots/jenkins-success.png)
+
+### GitHub Repository Files
+
+![GitHub Repository Files](screenshots/github-files.png).
 
 ## Conclusion
 
